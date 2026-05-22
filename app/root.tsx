@@ -19,20 +19,20 @@ export const links: Route.LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
+    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:wght@400;500;600;700&display=swap",
   },
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="bg-dark-base text-cream antialiased">
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -62,14 +62,16 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main className="pt-16 p-4 container mx-auto">
-      <h1>{message}</h1>
-      <p>{details}</p>
-      {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
-          <code>{stack}</code>
-        </pre>
-      )}
+    <main className="min-h-screen bg-dark-base flex items-center justify-center p-4">
+      <div className="text-center">
+        <h1 className="font-display text-4xl font-bold text-cream mb-2">{message}</h1>
+        <p className="text-cream/50">{details}</p>
+        {stack && (
+          <pre className="mt-6 w-full max-w-2xl p-4 overflow-x-auto rounded-lg bg-navy/20 border border-cream/10 text-left text-xs text-cream/60">
+            {stack}
+          </pre>
+        )}
+      </div>
     </main>
   );
 }

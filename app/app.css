@@ -1,15 +1,28 @@
 @import "tailwindcss";
 
+/* Use .dark class on <html> instead of prefers-color-scheme */
+@variant dark (&:is(.dark, .dark *));
+
 @theme {
+  --color-amber: #C8841A;
+  --color-terracotta: #C85A38;
+  --color-cream: #FAF5EB;
+  --color-navy: #1A2E3D;
+
+  /* Dark mode surface palette */
+  --color-dark-base: #0D1B2A;
+  --color-dark-deep: #070F1A;
+
+  --font-display: "Playfair Display", Georgia, serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  @apply min-h-screen bg-dark-base text-cream;
+}
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
+* {
+  @apply border-cream/10;
 }

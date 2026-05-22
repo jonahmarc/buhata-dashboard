@@ -1,13 +1,14 @@
-import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
+import { redirect } from "react-router";
+import { getStoredAuth } from "~/stores/authStore";
 
-export function meta({}: Route.MetaArgs) {
-  return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
-  ];
+export function clientLoader() {
+  const auth = getStoredAuth();
+  if (!auth?.token || !auth?.user) {
+    return redirect("/login");
+  }
+  return redirect(auth.user.role === "admin" ? "/admin" : "/login");
 }
 
 export default function Home() {
-  return <Welcome />;
+  return null;
 }
