@@ -114,7 +114,7 @@ export default function AdminDashboard() {
         }
       />
 
-      <div className="p-6 space-y-6 max-w-6xl">
+      <div className="p-6 space-y-6">
         {fetchError && (
           <div className="flex items-center gap-3 rounded-lg border border-terracotta/20 bg-terracotta/8 px-4 py-3 text-xs text-terracotta">
             <AlertTriangle className="h-4 w-4 shrink-0" />

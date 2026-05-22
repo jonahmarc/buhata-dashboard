@@ -74,7 +74,7 @@ export default function ClientsPage() {
         }
       />
 
-      <div className="p-6 space-y-4 max-w-6xl">
+      <div className="p-6 space-y-4">
         {fetchError && (
           <div className="rounded-lg border border-terracotta/20 bg-terracotta/8 px-4 py-3 text-xs text-terracotta">
             Could not reach the API. Check that the backend server is running.
