@@ -18,7 +18,7 @@ type LoginData = z.infer<typeof loginSchema>;
 export function clientLoader() {
   const auth = getStoredAuth();
   if (auth?.token && auth?.user) {
-    return redirect(auth.user.role === "admin" ? "/admin" : "/");
+    return redirect(auth.user.role === "admin" ? "/admin" : "/client");
   }
   return null;
 }
@@ -45,7 +45,7 @@ export default function LoginPage() {
       const { access_token } = await authService.login(data.email, data.password);
       const user = await authService.getMe(access_token);
       setAuth(access_token, user);
-      navigate(user.role === "admin" ? "/admin" : "/", { replace: true });
+      navigate(user.role === "admin" ? "/admin" : "/client", { replace: true });
     } catch {
       setError("root", {
         message: "Invalid email or password. Please try again.",

@@ -5,8 +5,10 @@ export interface User {
   id: string;
   email: string;
   role: "admin" | "client";
-  client_id: string | null;
+  is_active: boolean;
   created_at: string;
+  /** Populated for client-role users; null for admins. Added via backend /auth/me. */
+  client_id: string | null;
 }
 
 interface AuthState {

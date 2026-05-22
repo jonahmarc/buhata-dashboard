@@ -1,13 +1,5 @@
 import { NavLink } from "react-router";
-import {
-  LayoutDashboard,
-  Users,
-  Ticket,
-  CreditCard,
-  Wrench,
-  Activity,
-  LogOut,
-} from "lucide-react";
+import { LayoutDashboard, Ticket, CreditCard, LogOut } from "lucide-react";
 import { cn } from "~/lib/utils";
 import { useAuthStore } from "~/stores/authStore";
 
@@ -20,15 +12,12 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { to: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true },
-  { to: "/admin/clients", label: "Clients", icon: Users },
-  { to: "/admin/tickets", label: "Tickets", icon: Ticket },
-  { to: "/admin/upgrades", label: "Upgrades", icon: Wrench, disabled: true },
-  { to: "/admin/billing", label: "Billing", icon: CreditCard },
-  { to: "/admin/jobs", label: "Jobs", icon: Activity, disabled: true },
+  { to: "/client", label: "Dashboard", icon: LayoutDashboard, end: true },
+  { to: "/client/tickets", label: "My Tickets", icon: Ticket },
+  { to: "/client/billing", label: "Billing", icon: CreditCard },
 ];
 
-export function Sidebar() {
+export function ClientSidebar() {
   const { user, clearAuth } = useAuthStore();
 
   const handleLogout = () => {
@@ -36,7 +25,7 @@ export function Sidebar() {
     window.location.href = "/login";
   };
 
-  const initials = user?.email?.[0]?.toUpperCase() ?? "A";
+  const initials = user?.email?.[0]?.toUpperCase() ?? "C";
 
   return (
     <aside className="flex h-screen w-60 shrink-0 flex-col bg-dark-deep border-r border-cream/5">
@@ -50,7 +39,7 @@ export function Sidebar() {
             Buhata
           </span>
           <p className="text-[10px] text-cream/35 -mt-0.5 tracking-wider uppercase">
-            Admin
+            Client Portal
           </p>
         </div>
       </div>
@@ -106,7 +95,7 @@ export function Sidebar() {
             <p className="truncate text-xs font-medium text-cream">
               {user?.email}
             </p>
-            <p className="text-[10px] text-cream/35 capitalize">{user?.role}</p>
+            <p className="text-[10px] text-cream/35">Client</p>
           </div>
         </div>
         <button

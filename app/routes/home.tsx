@@ -6,7 +6,7 @@ export function clientLoader() {
   if (!auth?.token || !auth?.user) {
     return redirect("/login");
   }
-  return redirect(auth.user.role === "admin" ? "/admin" : "/login");
+  return redirect(auth.user.role === "admin" ? "/admin" : "/client");
 }
 
 export default function Home() {

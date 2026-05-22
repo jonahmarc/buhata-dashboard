@@ -34,8 +34,6 @@ function statusBadgeVariant(
 ): "success" | "info" | "warning" | "danger" | "default" {
   const map = {
     active: "success",
-    onboarding: "info",
-    past_due: "warning",
     deactivated: "danger",
     cancelled: "danger",
   } as const;
@@ -88,8 +86,8 @@ export default function AdminDashboard() {
   const stats = {
     total: clients.length,
     active: clients.filter((c) => c.status === "active").length,
-    onboarding: clients.filter((c) => c.status === "onboarding").length,
-    pastDue: clients.filter((c) => c.status === "past_due").length,
+    deactivated: clients.filter((c) => c.status === "deactivated").length,
+    cancelled: clients.filter((c) => c.status === "cancelled").length,
   };
 
   const recentClients = [...clients]
@@ -137,16 +135,16 @@ export default function AdminDashboard() {
             color="success"
           />
           <StatCard
-            label="Onboarding"
-            value={stats.onboarding}
+            label="Deactivated"
+            value={stats.deactivated}
             icon={TicketCheck}
-            color="info"
+            color="warning"
           />
           <StatCard
-            label="Past Due"
-            value={stats.pastDue}
+            label="Cancelled"
+            value={stats.cancelled}
             icon={AlertTriangle}
-            color="warning"
+            color="danger"
           />
         </div>
 

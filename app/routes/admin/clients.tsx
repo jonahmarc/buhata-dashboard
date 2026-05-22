@@ -29,8 +29,6 @@ function statusBadgeVariant(
 ): "success" | "info" | "warning" | "danger" | "default" {
   const map = {
     active: "success",
-    onboarding: "info",
-    past_due: "warning",
     deactivated: "danger",
     cancelled: "danger",
   } as const;
@@ -54,7 +52,7 @@ export default function ClientsPage() {
     const matchSearch =
       !q ||
       c.business_name.toLowerCase().includes(q) ||
-      c.domain.toLowerCase().includes(q);
+      (c.domain ?? "").toLowerCase().includes(q);
     const matchStatus = statusFilter === "all" || c.status === statusFilter;
     return matchSearch && matchStatus;
   });
@@ -166,7 +164,7 @@ export default function ClientsPage() {
                       </Link>
                     </td>
                     <td className="px-6 py-3.5 text-sm text-cream/40 hidden md:table-cell">
-                      {client.domain}
+                      {client.domain ?? "—"}
                     </td>
                     <td className="px-6 py-3.5 text-sm text-cream/60">
                       Tier {client.tier}
