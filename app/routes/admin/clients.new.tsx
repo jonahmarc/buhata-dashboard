@@ -98,150 +98,153 @@ export default function NewClientPage() {
       <div className="p-6">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-lg space-y-4"
+          className="grid grid-cols-2 gap-6"
         >
-          {/* Business info */}
-          <section className="rounded-xl border border-cream/5 bg-navy/10 p-6 space-y-4">
-            <div>
-              <h2 className="text-sm font-semibold text-cream">
-                Account Credentials
-              </h2>
-              <p className="mt-0.5 text-xs text-cream/40">
-                Login credentials for the client portal.
-              </p>
-            </div>
-
-            <Input
-              label="Email Address"
-              type="email"
-              placeholder="contact@acme.com"
-              autoFocus
-              autoComplete="off"
-              {...register("email")}
-              error={errors.email?.message}
-            />
-            <Input
-              label="Password"
-              type="password"
-              placeholder="••••••••"
-              autoComplete="new-password"
-              hint="Minimum 8 characters"
-              {...register("password")}
-              error={errors.password?.message}
-            />
-          </section>
-
-          <section className="rounded-xl border border-cream/5 bg-navy/10 p-6 space-y-4">
-            <div>
-              <h2 className="text-sm font-semibold text-cream">
-                Business Information
-              </h2>
-              <p className="mt-0.5 text-xs text-cream/40">
-                Basic details about the client.
-              </p>
-            </div>
-
-            <Input
-              label="Business Name"
-              placeholder="Acme Corp"
-              {...register("business_name")}
-              error={errors.business_name?.message}
-            />
-            <Input
-              label="Domain"
-              placeholder="acme.com"
-              hint="Client's website domain — no https://"
-              {...register("domain")}
-              error={errors.domain?.message}
-            />
-          </section>
-
-          {/* Plan details */}
-          <section className="rounded-xl border border-cream/5 bg-navy/10 p-6 space-y-4">
-            <div>
-              <h2 className="text-sm font-semibold text-cream">Plan Details</h2>
-              <p className="mt-0.5 text-xs text-cream/40">
-                Service tier and billing frequency.
-              </p>
-            </div>
-
-            <Select
-              label="Service Tier"
-              {...register("tier")}
-              error={errors.tier?.message}
-            >
-              {TIER_INFO.map((t) => (
-                <option key={t.value} value={t.value}>
-                  {t.label} · {t.quota}
-                </option>
-              ))}
-            </Select>
-
-            {tierInfo && (
-              <div className="flex gap-2.5 rounded-lg border border-amber/12 bg-amber/5 px-3.5 py-3">
-                <Info className="mt-px h-3.5 w-3.5 shrink-0 text-amber/70" />
-                <p className="text-xs text-amber/80 leading-relaxed">
-                  <span className="font-medium">{tierInfo.quota}</span> included.
-                  {tierInfo.note && ` ${tierInfo.note}`}
-                  {tierInfo.value < 5 &&
-                    " Overage billed as upgrade requests at $10/hr."}
+          {/* Left column — credentials + business info */}
+          <div className="space-y-4">
+            <section className="rounded-xl border border-cream/5 bg-navy/10 p-6 space-y-4">
+              <div>
+                <h2 className="text-sm font-semibold text-cream">
+                  Account Credentials
+                </h2>
+                <p className="mt-0.5 text-xs text-cream/40">
+                  Login credentials for the client portal.
                 </p>
+              </div>
+
+              <Input
+                label="Email Address"
+                type="email"
+                placeholder="contact@acme.com"
+                autoFocus
+                autoComplete="off"
+                {...register("email")}
+                error={errors.email?.message}
+              />
+              <Input
+                label="Password"
+                type="password"
+                placeholder="••••••••"
+                autoComplete="new-password"
+                hint="Minimum 8 characters"
+                {...register("password")}
+                error={errors.password?.message}
+              />
+            </section>
+
+            <section className="rounded-xl border border-cream/5 bg-navy/10 p-6 space-y-4">
+              <div>
+                <h2 className="text-sm font-semibold text-cream">
+                  Business Information
+                </h2>
+                <p className="mt-0.5 text-xs text-cream/40">
+                  Basic details about the client.
+                </p>
+              </div>
+
+              <Input
+                label="Business Name"
+                placeholder="Acme Corp"
+                {...register("business_name")}
+                error={errors.business_name?.message}
+              />
+              <Input
+                label="Domain"
+                placeholder="acme.com"
+                hint="Client's website domain — no https://"
+                {...register("domain")}
+                error={errors.domain?.message}
+              />
+            </section>
+          </div>
+
+          {/* Right column — plan details + actions */}
+          <div className="space-y-4">
+            <section className="rounded-xl border border-cream/5 bg-navy/10 p-6 space-y-4">
+              <div>
+                <h2 className="text-sm font-semibold text-cream">Plan Details</h2>
+                <p className="mt-0.5 text-xs text-cream/40">
+                  Service tier and billing frequency.
+                </p>
+              </div>
+
+              <Select
+                label="Service Tier"
+                {...register("tier")}
+                error={errors.tier?.message}
+              >
+                {TIER_INFO.map((t) => (
+                  <option key={t.value} value={t.value}>
+                    {t.label} · {t.quota}
+                  </option>
+                ))}
+              </Select>
+
+              {tierInfo && (
+                <div className="flex gap-2.5 rounded-lg border border-amber/12 bg-amber/5 px-3.5 py-3">
+                  <Info className="mt-px h-3.5 w-3.5 shrink-0 text-amber/70" />
+                  <p className="text-xs text-amber/80 leading-relaxed">
+                    <span className="font-medium">{tierInfo.quota}</span> included.
+                    {tierInfo.note && ` ${tierInfo.note}`}
+                    {tierInfo.value < 5 &&
+                      " Overage billed as upgrade requests at $10/hr."}
+                  </p>
+                </div>
+              )}
+
+              <div className="space-y-1.5">
+                <label className="text-sm font-medium text-cream/80">
+                  Billing Cycle
+                </label>
+                <div className="grid grid-cols-2 gap-3">
+                  {(["monthly", "annual"] as const).map((cycle) => (
+                    <label
+                      key={cycle}
+                      className="flex cursor-pointer items-start gap-3 rounded-lg border border-cream/10 bg-navy/20 p-4 transition-colors hover:border-cream/20 has-checked:border-amber/40 has-checked:bg-amber/5"
+                    >
+                      <input
+                        type="radio"
+                        value={cycle}
+                        {...register("billing_cycle")}
+                        className="mt-0.5 accent-amber shrink-0"
+                      />
+                      <div>
+                        <p className="text-sm font-medium text-cream capitalize">
+                          {cycle}
+                        </p>
+                        <p className="mt-0.5 text-xs text-cream/40">
+                          {cycle === "monthly"
+                            ? "Billed every 30 days"
+                            : "Billed annually · 2 months free"}
+                        </p>
+                      </div>
+                    </label>
+                  ))}
+                </div>
+                {errors.billing_cycle && (
+                  <p className="text-xs text-terracotta">
+                    {errors.billing_cycle.message}
+                  </p>
+                )}
+              </div>
+            </section>
+
+            {errors.root && (
+              <div className="rounded-lg border border-terracotta/20 bg-terracotta/8 px-4 py-3 text-xs text-terracotta">
+                {errors.root.message}
               </div>
             )}
 
-            {/* Billing cycle */}
-            <div className="space-y-1.5">
-              <label className="text-sm font-medium text-cream/80">
-                Billing Cycle
-              </label>
-              <div className="grid grid-cols-2 gap-3">
-                {(["monthly", "annual"] as const).map((cycle) => (
-                  <label
-                    key={cycle}
-                    className="flex cursor-pointer items-start gap-3 rounded-lg border border-cream/10 bg-navy/20 p-4 transition-colors hover:border-cream/20 has-checked:border-amber/40 has-checked:bg-amber/5"
-                  >
-                    <input
-                      type="radio"
-                      value={cycle}
-                      {...register("billing_cycle")}
-                      className="mt-0.5 accent-amber shrink-0"
-                    />
-                    <div>
-                      <p className="text-sm font-medium text-cream capitalize">
-                        {cycle}
-                      </p>
-                      <p className="mt-0.5 text-xs text-cream/40">
-                        {cycle === "monthly"
-                          ? "Billed every 30 days"
-                          : "Billed annually · 2 months free"}
-                      </p>
-                    </div>
-                  </label>
-                ))}
-              </div>
-              {errors.billing_cycle && (
-                <p className="text-xs text-terracotta">
-                  {errors.billing_cycle.message}
-                </p>
-              )}
-            </div>
-          </section>
-
-          {errors.root && (
-            <div className="rounded-lg border border-terracotta/20 bg-terracotta/8 px-4 py-3 text-xs text-terracotta">
-              {errors.root.message}
-            </div>
-          )}
-
-          <div className="flex items-center gap-3 pt-1">
-            <Button type="submit" loading={isSubmitting}>
-              Create Client
-            </Button>
-            <Link to="/admin/clients">
-              <Button type="button" variant="ghost">
-                Cancel
+            <div className="flex items-center gap-3">
+              <Button type="submit" loading={isSubmitting}>
+                Create Client
               </Button>
-            </Link>
+              <Link to="/admin/clients">
+                <Button type="button" variant="ghost">
+                  Cancel
+                </Button>
+              </Link>
+            </div>
           </div>
         </form>
       </div>
