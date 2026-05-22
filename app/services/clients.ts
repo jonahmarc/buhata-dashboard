@@ -27,6 +27,8 @@ export interface Client {
 }
 
 export interface CreateClientPayload {
+  email: string;
+  password: string;
   business_name: string;
   domain: string;
   tier: number;

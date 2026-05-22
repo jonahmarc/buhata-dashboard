@@ -13,6 +13,8 @@ import { createClient } from "~/services/clients";
 // form and coerce to number in onSubmit. Zod validates the string is one of
 // the valid tier values.
 const schema = z.object({
+  email: z.string().email("Enter a valid email address"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
   business_name: z
     .string()
     .min(2, "Business name must be at least 2 characters")
@@ -102,6 +104,36 @@ export default function NewClientPage() {
           <section className="rounded-xl border border-cream/5 bg-navy/10 p-6 space-y-4">
             <div>
               <h2 className="text-sm font-semibold text-cream">
+                Account Credentials
+              </h2>
+              <p className="mt-0.5 text-xs text-cream/40">
+                Login credentials for the client portal.
+              </p>
+            </div>
+
+            <Input
+              label="Email Address"
+              type="email"
+              placeholder="contact@acme.com"
+              autoFocus
+              autoComplete="off"
+              {...register("email")}
+              error={errors.email?.message}
+            />
+            <Input
+              label="Password"
+              type="password"
+              placeholder="••••••••"
+              autoComplete="new-password"
+              hint="Minimum 8 characters"
+              {...register("password")}
+              error={errors.password?.message}
+            />
+          </section>
+
+          <section className="rounded-xl border border-cream/5 bg-navy/10 p-6 space-y-4">
+            <div>
+              <h2 className="text-sm font-semibold text-cream">
                 Business Information
               </h2>
               <p className="mt-0.5 text-xs text-cream/40">
@@ -112,7 +144,6 @@ export default function NewClientPage() {
             <Input
               label="Business Name"
               placeholder="Acme Corp"
-              autoFocus
               {...register("business_name")}
               error={errors.business_name?.message}
             />
