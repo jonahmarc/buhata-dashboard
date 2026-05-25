@@ -1,7 +1,7 @@
 import api from "./api";
 
 // Matches the backend `client_status` enum (models.py)
-export type ClientStatus = "active" | "deactivated" | "cancelled";
+export type ClientStatus = "active" | "deactivated" | "cancelled" | "onboarding";
 
 export type BillingCycle = "monthly" | "annual";
 

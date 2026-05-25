@@ -31,6 +31,7 @@ function statusBadgeVariant(
     active: "success",
     deactivated: "danger",
     cancelled: "danger",
+    onboarding: "info",
   } as const;
   return map[status] ?? "default";
 }

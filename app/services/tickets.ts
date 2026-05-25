@@ -87,3 +87,33 @@ export async function closeTicket(id: string): Promise<Ticket> {
   const { data } = await api.patch<Ticket>(`/tickets/${id}/close`);
   return data;
 }
+
+export interface Comment {
+  id: string;
+  ticket_id: string;
+  user_id: string;
+  body: string;
+  is_internal: boolean;
+  created_at: string;
+}
+
+export interface AddCommentPayload {
+  body: string;
+  is_internal?: boolean;
+}
+
+export async function getComments(ticketId: string): Promise<Comment[]> {
+  const { data } = await api.get<Comment[]>(`/tickets/${ticketId}/comments`);
+  return data;
+}
+
+export async function addComment(
+  ticketId: string,
+  payload: AddCommentPayload
+): Promise<Comment> {
+  const { data } = await api.post<Comment>(
+    `/tickets/${ticketId}/comments`,
+    payload
+  );
+  return data;
+}

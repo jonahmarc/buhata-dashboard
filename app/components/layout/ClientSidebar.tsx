@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import { LayoutDashboard, Ticket, CreditCard, LogOut } from "lucide-react";
+import { LayoutDashboard, Ticket, CreditCard, Wrench, HardHat, LogOut } from "lucide-react";
 import { cn } from "~/lib/utils";
 import { useAuthStore } from "~/stores/authStore";
 
@@ -14,6 +14,8 @@ interface NavItem {
 const navItems: NavItem[] = [
   { to: "/client", label: "Dashboard", icon: LayoutDashboard, end: true },
   { to: "/client/tickets", label: "My Tickets", icon: Ticket },
+  { to: "/client/upgrades", label: "Upgrades", icon: Wrench },
+  { to: "/client/onboarding", label: "Onboarding", icon: HardHat },
   { to: "/client/billing", label: "Billing", icon: CreditCard },
 ];
 

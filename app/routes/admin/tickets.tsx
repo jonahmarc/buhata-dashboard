@@ -1,4 +1,4 @@
-import { redirect, useLoaderData, useRevalidator } from "react-router";
+import { redirect, useLoaderData, useRevalidator, Link } from "react-router";
 import { Ticket, AlertTriangle } from "lucide-react";
 import { useState } from "react";
 import { Topbar } from "~/components/layout/Topbar";
@@ -164,9 +164,14 @@ export default function AdminTicketsPage() {
                     className="transition-colors hover:bg-cream/3"
                   >
                     <td className="px-6 py-3.5">
-                      <p className="text-sm font-medium text-cream">
-                        {ticket.subject}
-                      </p>
+                      <Link
+                        to={`/admin/tickets/${ticket.id}`}
+                        className="group"
+                      >
+                        <p className="text-sm font-medium text-cream group-hover:text-amber transition-colors">
+                          {ticket.subject}
+                        </p>
+                      </Link>
                       <p className="mt-0.5 text-xs text-cream/30 font-mono">
                         {ticket.client_id.slice(0, 8)}
                       </p>

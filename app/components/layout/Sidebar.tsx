@@ -23,7 +23,7 @@ const navItems: NavItem[] = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true },
   { to: "/admin/clients", label: "Clients", icon: Users },
   { to: "/admin/tickets", label: "Tickets", icon: Ticket },
-  { to: "/admin/upgrades", label: "Upgrades", icon: Wrench, disabled: true },
+  { to: "/admin/upgrades", label: "Upgrades", icon: Wrench },
   { to: "/admin/billing", label: "Billing", icon: CreditCard },
   { to: "/admin/jobs", label: "Jobs", icon: Activity, disabled: true },
 ];
